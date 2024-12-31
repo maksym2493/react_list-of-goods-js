@@ -24,18 +24,19 @@ const SORT_BY_LENGTH = 2;
 function prepareGoods(goods, sortType, reversed) {
   const preparedGoods = [...goods];
 
-  preparedGoods.sort((goodA, goodB) => {
-    switch (sortType) {
-      case ALPHABETICAL_SORTING:
-        return goodA.localeCompare(goodB);
+  // eslint-disable-next-line default-case
+  switch (sortType) {
+    case RESET_SORTING:
+      break;
 
-      case SORT_BY_LENGTH:
-        return goodA.length - goodB.length;
+    case ALPHABETICAL_SORTING:
+      preparedGoods.sort((goodA, goodB) => goodA.localeCompare(goodB));
+      break;
 
-      default:
-        return 0;
-    }
-  });
+    case SORT_BY_LENGTH:
+      preparedGoods.sort((goodA, goodB) => goodA.length - goodB.length);
+      break;
+  }
 
   return reversed ? preparedGoods.reverse() : preparedGoods;
 }
